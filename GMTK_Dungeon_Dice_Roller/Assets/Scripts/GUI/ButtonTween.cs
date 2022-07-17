@@ -114,6 +114,8 @@ public class ButtonTween : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             .setOnComplete(() => LeanTween.scale(gameObject, _originalScale + Vector3.one * clickScale, growTimeAfterShrink).setEaseInOutSine() // grow to bigger scale
                 .setOnComplete(() => LeanTween.scale(gameObject, _originalScale, reachNormalSizeTime).setEaseInOutSine() // resize to original size
                     .setOnComplete(ClickComplete))); // highlight again in case its being highlighted
+        
+        AudioManager.Play("sfx_onButton_click");
     }
 
     /// <summary>
