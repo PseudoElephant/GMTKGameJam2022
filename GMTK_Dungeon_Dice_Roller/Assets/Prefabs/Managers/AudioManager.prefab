@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &64698666914218970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64698666914218968}
+  - component: {fileID: 64698666914218971}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &64698666914218968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64698666914218970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.08504434, y: -0.35204065, z: -0.0153378965}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &64698666914218971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64698666914218970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1fbfdb5f9cddd54ca02c5f84e0b963e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: sfx_ApplyBadAbility
+    clip: {fileID: 8300000, guid: 501245280eeb101448acbca8e73ba3d0, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_ApplyGoodAbility
+    clip: {fileID: 8300000, guid: 6e0fddf42d28bc241b3b0b22c6317ce5, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_BulletHitWall
+    clip: {fileID: 8300000, guid: c957423672eb52745a7e33b4d106383c, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_DiceRoll
+    clip: {fileID: 8300000, guid: 8422fa51368239f4fa7b31b26dbb7862, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_DoorClose
+    clip: {fileID: 8300000, guid: 0c48474de27e40c47aea919c7d243997, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_DoorOpen
+    clip: {fileID: 8300000, guid: ea7aa02f2441a8c4885825dbbaf4932f, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_EnemyDeath
+    clip: {fileID: 8300000, guid: 62c99f6dbda983047891f6f4222f7b3d, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_EnemyShoot
+    clip: {fileID: 8300000, guid: b3ff19e581090ba48b39c356a82d41b6, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_EnemyShootHard
+    clip: {fileID: 8300000, guid: 1edd81f0be0fc7947b875e3982db7988, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_laser
+    clip: {fileID: 8300000, guid: 645e62d601be03046b4c1c80470ce7c3, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_levelStart
+    clip: {fileID: 8300000, guid: 69b9351eac3549c44853c19c05d0cb31, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_onButton_click
+    clip: {fileID: 8300000, guid: 3921e81ae47d1584c8ca879fb3792f59, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_onPlayerDie
+    clip: {fileID: 8300000, guid: 7d17789227495a14ea6a9d48921a766f, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_onPlayerHit
+    clip: {fileID: 8300000, guid: 4f5db2ebb55170f4e903b1ffad2038de, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_SawSpin
+    clip: {fileID: 8300000, guid: 242129482ee14104aaf73fc398716aea, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_shoot_hard
+    clip: {fileID: 8300000, guid: 6dd92bac966c87d448fdbedded9a0e12, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: sfx_shoot_soft
+    clip: {fileID: 8300000, guid: f4922a6ff1a8e5d4f9380acf13c69d68, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: SongGame
+    clip: {fileID: 8300000, guid: 05b295f26b93533478a6746f8d809417, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - name: SongMenu
+    clip: {fileID: 8300000, guid: a5202b03ce33c584686768053fc7542a, type: 3}
+    volume: 0.5
+    pitch: 0
+    source: {fileID: 0}

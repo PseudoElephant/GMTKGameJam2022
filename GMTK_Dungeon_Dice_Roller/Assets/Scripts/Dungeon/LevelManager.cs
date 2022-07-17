@@ -106,7 +106,7 @@ public class LevelManager : MonoBehaviour
                 LevelManager.OnLevelBeaten();
             }
 
-            if (OnLevelBeaten != null)
+            if (OnLevelFinish != null)
             {
                 LevelManager.OnLevelFinish();
             }
@@ -124,7 +124,7 @@ public class LevelManager : MonoBehaviour
         switch(e) {
             case Event.PlayerHit:
             {
-                LevelManager.OnPlayerHit();
+                LevelManager.OnPlayerHit?.Invoke();
                 break;
             }
             case Event.PlayerFire:

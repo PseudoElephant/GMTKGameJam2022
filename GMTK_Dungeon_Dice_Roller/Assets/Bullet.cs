@@ -26,10 +26,13 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "HarmEnemy" || other.gameObject.tag == "HarmPlayer") return;
-        
+
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Enemy")
+        {
+            AudioManager.Play("sfx_BulletHitWall");
             Destroy(gameObject);
-        
+        }
+
         if (gameObject.tag == "HarmEnemy" && other.gameObject.tag == "Enemy")
             Destroy(gameObject);
 
