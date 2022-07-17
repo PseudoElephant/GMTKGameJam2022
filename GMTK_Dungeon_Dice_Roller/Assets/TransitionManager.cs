@@ -9,12 +9,15 @@ public class TransitionManager : MonoBehaviour
     public float transitionTime;
     public CanvasGroup transition;
 
+    public string startScene = "Sart Room";
+
     // Start is called before the first frame update
     void Start()
     {
         if (Instance == null) {
             Instance = this;
             LeanTween.alphaCanvas(transition, 0f, transitionTime).setEaseInSine();
+            LevelManager.OnLevelFinish += () => LoadScene(startScene);
             return;
         }
 

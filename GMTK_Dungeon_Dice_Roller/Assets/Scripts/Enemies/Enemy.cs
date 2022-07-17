@@ -19,6 +19,16 @@ namespace Enemies
             Debug.Log("I am in!");
             _animator = GetComponent<Animator>();
             LevelManager.Instance.AddEnemy();
+            SubscribeEvents();
+            ApplyBuffs();
+        }
+
+        private void ApplyBuffs() 
+        {
+            LevelManager.EntityBuff buffs = LevelManager.GetEnemyBuffs();
+            damage = Math.Clamp(damage + buffs.damage, 0, 1000);
+            health = Math.Clamp(health + buffs.health, 1, 1000);
+            moveSpeed = Math.Clamp(moveSpeed + buffs.speed, 0, 1000);
         }
 
         private void OnDuplicate()
