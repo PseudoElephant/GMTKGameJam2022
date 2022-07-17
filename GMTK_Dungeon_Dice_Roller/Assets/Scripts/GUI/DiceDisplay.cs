@@ -20,19 +20,23 @@ public class DiceDisplay : MonoBehaviour
 
     private Sprite[] spritesDice;
     private bool _isEvilDice;
-        
+    private bool _isDisplaying = false;
+    private Queue<bool> _diceQueue;
+
     private void Awake()
     {
         _originalScale = diceObjectPlaceHolder.transform.localScale;
         _image = diceObjectPlaceHolder.GetComponent<Image>();
         LeanTween.scaleX(diceObjectPlaceHolder, 0f, 0f).setEaseInOutSine();
         LeanTween.scaleY(text.gameObject, 0f, 0f);
+        _diceQueue = new Queue<bool>();
         
         RegisterEvents();
     }
 
     private void PauseAndShowCanvas(bool isEvil)
     {
+        _isDisplaying = true;
         _isEvilDice = isEvil;
         spritesDice = (isEvil) ? badDice : goodDice;
         _image.sprite = spritesDice[0];
@@ -105,16 +109,44 @@ public class DiceDisplay : MonoBehaviour
     private void HideDice()
     {
         LeanTween.scaleY(text.gameObject, 0f, 0.3f).setEaseOutSine();
-        LeanTween.scaleX(diceObjectPlaceHolder, 0f, 0.3f).setEaseInOutSine();
+        LeanTween.scaleX(diceObjectPlaceHolder, 0f, 0.3f).setEaseInOutSine().setOnComplete(()=>
+        {
+            _isDisplaying = false;
+            CheckQueue();
+        });
     }
     
     public void TriggerGoodDice()
     {
+        if (_isDisplaying)
+        {
+            _diceQueue.Enqueue(false);
+            return;
+        }
+        
         PauseAndShowCanvas(false);
     }
 
+    private void CheckQueue()
+    {
+        if (_diceQueue.Count == 0) return;
+        
+        if (_diceQueue.Dequeue())
+        {
+            TriggerBadDice();
+        } else
+        {
+            TriggerGoodDice();
+        }
+    }
     public void TriggerBadDice()
     {
+        if (_isDisplaying)
+        {
+            _diceQueue.Enqueue(true);
+            return;
+        }
+        
         PauseAndShowCanvas(true);
     }
 
