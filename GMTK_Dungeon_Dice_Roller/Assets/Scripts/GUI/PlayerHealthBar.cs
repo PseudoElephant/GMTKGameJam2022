@@ -48,7 +48,8 @@ public class PlayerHealthBar : MonoBehaviour
 
         int numOfChildren = transform.childCount;
         for (int i = 0; i < healthToRemove; i++)
-        { 
+        {
+            // TODO: Somwhere here the healthbar is not removing the correct indices 
             transform.GetChild(numOfChildren - i - 1).GetComponent<HealthTweenAnimations>().Hide();
         }
 

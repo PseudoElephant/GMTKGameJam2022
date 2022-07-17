@@ -27,6 +27,9 @@ public class Player : MonoBehaviour
     
     private void OnHit()
     {
+        LevelManager.BroadcastEvent(LevelManager.Event.GoodRoll);
+        LevelManager.BroadcastEvent(LevelManager.Event.DiceRoll);
+        
         Vector3 originalScale = transform.localScale;
         LeanTween.scale(gameObject, originalScale + new Vector3(0.05f, 0.05f, 0.05f), 0.1f).setEaseInOutSine()
             .setOnComplete(

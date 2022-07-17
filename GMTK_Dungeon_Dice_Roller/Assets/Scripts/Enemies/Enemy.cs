@@ -59,10 +59,11 @@ namespace Enemies
             _animator.SetTrigger("Death");
             LeanTween.scale(gameObject, Vector3.zero, 1f).setEaseInOutSine().setOnComplete(() => Destroy(gameObject));
             LevelManager.BroadcastEvent(LevelManager.Event.EnemyKilled);
-            
+
             if (Random.value > 0.5)
             {
                 LevelManager.BroadcastEvent(LevelManager.Event.DiceRoll);
+                LevelManager.BroadcastEvent(LevelManager.Event.BadRoll);
             }
         }
 
