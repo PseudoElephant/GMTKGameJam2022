@@ -100,7 +100,7 @@ public class Controller : MonoBehaviour
 
     private void DashAnimation()
     {
-        Vector2 _originalScale = transform.localScale;
+        Vector2 _originalScale = Vector2.one;
         LeanTween.scale(gameObject, transform.localScale + (Vector3.one * 0.15f), 0.1f).setEaseOutSine().setOnComplete(
             () =>
             {
@@ -110,12 +110,13 @@ public class Controller : MonoBehaviour
 
     private void CanDashAgainAnimation()
     {
-        Vector2 _originalScale = transform.localScale;
-        LeanTween.scale(gameObject, transform.localScale + (Vector3.one * 0.1f), 0.3f).setEaseOutSine().setOnComplete(
-            () =>
+        LeanTween.rotateLocal(gameObject, new Vector3(0f, 0f, -6f), 0.1f).setEaseInOutSine().setOnComplete(() =>
+        {
+            LeanTween.rotateLocal(gameObject, new Vector3(0f, 0f, 6f), 0.1f).setEaseInOutSine().setOnComplete(() =>
             {
-                LeanTween.scale(gameObject, _originalScale, 0.3f).setEaseOutSine();
+                LeanTween.rotateLocal(gameObject, Vector3.zero, 0.1f).setEaseInOutSine();
             });
+        });
     }
 
     IEnumerator DashDuration()
