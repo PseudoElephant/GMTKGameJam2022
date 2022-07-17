@@ -12,6 +12,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GUI/ButtonTween.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GUI/DiceDisplay.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -72,7 +73,9 @@
       <updated>1657932137474</updated>
       <workItem from="1657932149915" duration="5389000" />
       <workItem from="1658019405172" duration="2815000" />
-      <workItem from="1658024879606" duration="9393000" />
+      <workItem from="1658024879606" duration="13222000" />
+      <workItem from="1658039197853" duration="16000" />
+      <workItem from="1658057833754" duration="5348000" />
     </task>
     <servers />
   </component>

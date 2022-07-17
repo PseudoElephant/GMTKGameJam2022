@@ -27,7 +27,9 @@ public class LevelManager : MonoBehaviour
     DiceRoll,
     EnemyKilled,
     PlayerDeath,
-    ExtraLife
+    ExtraLife,
+    GoodRoll,
+    BadRoll
     }
 
 // Level Events
@@ -67,7 +69,10 @@ public class LevelManager : MonoBehaviour
     public static event ModifierCallback OnDashCountChange;
     public static event ModifierCallback OnIncreaseEnemyHealth;
     public static event ModifierCallback OnIncreaseEnemyDamage;
-     public static event ModifierCallback OnIncreaseEnemySpeed;
+    public static event ModifierCallback OnIncreaseEnemySpeed;
+
+    public static event CallbackAction OnGoodDiceRoll;
+    public static event CallbackAction OnBadDiceRoll;
 
 
     private void Awake() {
@@ -129,12 +134,12 @@ public class LevelManager : MonoBehaviour
             }
             case Event.PlayerFire:
             {
-                LevelManager.OnPlayerFire();    
+                LevelManager.OnPlayerFire?.Invoke();    
                 break;
             }   
             case Event.DiceRoll:
             {
-                LevelManager.OnDiceRoll();
+                LevelManager.OnDiceRoll?.Invoke();
                 break;
             }   
             case Event.EnemyKilled:
@@ -149,16 +154,21 @@ public class LevelManager : MonoBehaviour
             }
             case Event.ExtraLife:
             {
-                LevelManager.OnExtraLife();
+                LevelManager.OnExtraLife?.Invoke();
                 break;
             }
+            case Event.GoodRoll:
+                LevelManager.OnGoodDiceRoll?.Invoke();
+                break;
+            case Event.BadRoll:
+                LevelManager.OnBadDiceRoll?.Invoke();
+                break;
             default: break;
         }
     }
     // public static void BroadcastEvent(Event e, params string[] list) {
     
     public static void SetHealth(int health) {
-        Debug.Log("Health Change");
         LevelManager.OnChangeHealth(health);
     }
     public static void AddGoodDice(Dice.GoodDice dice) {
@@ -170,12 +180,12 @@ public class LevelManager : MonoBehaviour
         }
         case Dice.GoodDice.IncreaseSpeed: 
         {
-            OnIncreaseSpeed(1f);
+            OnIncreaseSpeed?.Invoke(1f);
             break;
         }
         case Dice.GoodDice.IncreaseDamage:
         {
-            OnIncreaseDamage(1f);
+            OnIncreaseDamage?.Invoke(1f);
             break;
         }
         case Dice.GoodDice.LaserBeam:
@@ -185,17 +195,17 @@ public class LevelManager : MonoBehaviour
         }
         case Dice.GoodDice.ExtraShot:
         {
-            OnExtraShot();
+            OnExtraShot?.Invoke();
             break;
         }
         case Dice.GoodDice.IncreaseAttackSpeed:
         {
-            OnIncreaseRate(1f);
+            OnIncreaseRate?.Invoke(1f);
             break;
         }
         case Dice.GoodDice.FasterBulletSpeed:
         {
-            OnIncreaseBulletSpeed(1f);
+            OnIncreaseBulletSpeed?.Invoke(1f);
             break;
         }
         case Dice.GoodDice.NukeGame:
@@ -205,21 +215,23 @@ public class LevelManager : MonoBehaviour
         }
         case Dice.GoodDice.LowerDashCooldown:
         {
-            OnDecreaseDashCooldown(1f);
+            OnDecreaseDashCooldown?.Invoke(1f);
             break;
         }
 
         default: break;
         }
+    
+        AudioManager.Play("sfx_ApplyGoodAbility");
     }
 
     public static void AddBadDice(Dice.BadDice dice) {
     
-    switch (dice) {
+        switch (dice) {
         // could refactor to only send action, values and use in other comps
         case Dice.BadDice.FasterEnemies: 
         {
-            OnIncreaseEnemySpeed(1f);
+            OnIncreaseEnemySpeed?.Invoke(1f);
             break;
         }
         case Dice.BadDice.SpawnEnemy: 
@@ -229,7 +241,7 @@ public class LevelManager : MonoBehaviour
         }
         case Dice.BadDice.NoDash:
         {
-            OnDashCountChange(0);
+            OnDashCountChange?.Invoke(0);
             break;
         }
         case Dice.BadDice.SpawnBomb:
@@ -239,21 +251,23 @@ public class LevelManager : MonoBehaviour
         }
         case Dice.BadDice.DuplicateEnemies:
         {
-            OnDuplicate();
+            OnDuplicate?.Invoke();
             break;
         }
         case Dice.BadDice.IncreaseEnemyHealth:
         {
-            OnIncreaseEnemyHealth(10f);
+            OnIncreaseEnemyHealth?.Invoke(10f);
             break;
         }
         case Dice.BadDice.IncreaseEnemyDamage:
         {
-            OnIncreaseEnemyDamage(10f);
+            OnIncreaseEnemyDamage?.Invoke(10f);
             break;
         }
         default: break;
         }
+    
+        AudioManager.Play("sfx_ApplyGoodAbility");
     }
     // }
     IEnumerator LateStart() {
@@ -267,5 +281,4 @@ public class LevelManager : MonoBehaviour
             LevelManager.OnLevelStart();
         }       
     }
-
 }

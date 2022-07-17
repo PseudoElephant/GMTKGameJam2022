@@ -16,14 +16,16 @@ public class Controller : MonoBehaviour
     [Header("Movement")] 
     [Tooltip("Configure the player movement")]
     public float moveSpeed = 5f;
-    public float dashDistance = 5f;
-    public int dashCount;
+    public float dashSpeed = 10f;
+    public float dashTime = 1f;
 
     public float dashHardCooldown;
 
     private float _currentDashCooldown;
 
     private bool _dashing;
+
+    private Vector2 _dashDirection;
 
     Vector2 _moveDirection = Vector2.zero;
 
@@ -33,20 +35,17 @@ public class Controller : MonoBehaviour
 
     int _currentDashCount;
 
+    private bool _canDash = true;
+
     Rigidbody2D _rb;
 
     public void Awake(){
         dashAction.performed += _ => OnDash();
-        _currentDashCount = dashCount;
+        SubscribeEvents();
     }
 
-    public void SubscribeEvents() {
+    private void SubscribeEvents() {
         LevelManager.OnIncreaseSpeed += extra => moveSpeed += extra;
-        LevelManager.OnDashCountChange += count => {
-             dashCount += (int)count;
-             dashCount = Math.Min(dashCount, _currentDashCount);
-         };
-         
     }
 
     void Start() {
@@ -65,30 +64,58 @@ public class Controller : MonoBehaviour
     public Vector2 GetMoveDirection() {
         return _moveDirection;
     }
-    void OnDash() {
-        Debug.Log("dashing");
-        if (_currentDashCooldown <= 0 && !_dashing && _moveDirection.magnitude != 0) {
+    void OnDash()
+    {
+        if (!_canDash) return;
+
+        if (_currentDashCooldown <= 0 && !_dashing && _moveDirection.magnitude != 0)
+        {
+            DashAnimation();
+            
+            _canDash = false;
             _dashing = true;
-            _currentDashCount--;
+            _dashDirection = _moveDirection;
+            
+            StartCoroutine(DashDuration());
+            
             if (_currentDashCount <= 0) {
                 _currentDashCooldown = dashHardCooldown;
-                 StartCoroutine(WaitThen(dashHardCooldown, () => {
-                _currentDashCooldown = 0;
-                _currentDashCount = dashCount;
-            }));
+                 StartCoroutine(WaitThen(dashHardCooldown, () => 
+                 {
+                    _currentDashCooldown = 0;
+                 }));
             }
-           
-           Vector3 currPos = transform.position;
-            _dashTarget =  currPos + new Vector3(_moveDirection.x, _moveDirection.y, 0) * dashDistance;
-             
-             RaycastHit2D hit = Physics2D.Raycast(new Vector3(currPos.x - 2f, currPos.y - 2f, 0), _moveDirection, dashDistance);
-             // Clamping
-             if (hit.collider != null) {
-                _dashTarget = hit.point;
-             }
-
-            _startDistance = Vector3.Distance(transform.position, _dashTarget);
         }
+    }
+
+    private void DashAnimation()
+    {
+        Vector2 _originalScale = transform.localScale;
+        LeanTween.scale(gameObject, transform.localScale + (Vector3.one * 0.15f), 0.1f).setEaseOutSine().setOnComplete(
+            () =>
+            {
+                LeanTween.scale(gameObject, _originalScale, 0.3f).setEaseOutSine();
+            });
+    }
+
+    private void CanDashAgainAnimation()
+    {
+        Vector2 _originalScale = transform.localScale;
+        LeanTween.scale(gameObject, transform.localScale + (Vector3.one * 0.1f), 0.3f).setEaseOutSine().setOnComplete(
+            () =>
+            {
+                LeanTween.scale(gameObject, _originalScale, 0.3f).setEaseOutSine();
+            });
+    }
+
+    IEnumerator DashDuration()
+    {
+        yield return new WaitForSeconds(dashTime);
+        _dashing = false;
+        
+        yield return new WaitForSeconds(dashHardCooldown);
+        CanDashAgainAnimation();
+        _canDash = true;
     }
 
     IEnumerator WaitThen(float cooldown, Action callback) {
@@ -106,17 +133,8 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
         if (_dashing) {
-
-            float percent = 1 -  Vector3.Distance(transform.position, _dashTarget) / _startDistance;
-
-            transform.position = Vector3.Lerp(transform.position, _dashTarget, percent);
-
-            if (percent > 0.8) {
-                _dashing = false;
-            }
-
+            _rb.velocity = _dashDirection * dashSpeed;
             return;
         }
         _rb.velocity = _moveDirection * moveSpeed;
