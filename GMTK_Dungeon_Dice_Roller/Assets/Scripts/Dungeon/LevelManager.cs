@@ -113,32 +113,32 @@ public class LevelManager : MonoBehaviour
         switch(e) {
             case Event.PlayerHit:
             {
-                OnPlayerHit();
+                LevelManager.OnPlayerHit();
                 break;
             }
             case Event.PlayerFire:
             {
-                OnPlayerFire();    
+                LevelManager.OnPlayerFire();    
                 break;
             }   
             case Event.DiceRoll:
             {
-                OnDiceRoll();
+                LevelManager.OnDiceRoll();
                 break;
             }   
             case Event.EnemyKilled:
             {
-                Instance.RemoveEnemy();
+                LevelManager.Instance.RemoveEnemy();
                 break;
             }
             case Event.PlayerDeath:
             {
-                LevelEnd();
+                LevelManager.LevelEnd();
                 break;
             }
             case Event.ExtraLife:
             {
-                OnExtraLife();
+                LevelManager.OnExtraLife();
                 break;
             }
             default: break;
@@ -154,7 +154,7 @@ public class LevelManager : MonoBehaviour
     switch (dice) {
         case Dice.GoodDice.ExtraLife: 
         {
-            BroadcastEvent(Event.ExtraLife);
+            LevelManager.BroadcastEvent(Event.ExtraLife);
             break;
         }
         case Dice.GoodDice.IncreaseSpeed: 

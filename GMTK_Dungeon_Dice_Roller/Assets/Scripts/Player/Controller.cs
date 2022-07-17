@@ -62,6 +62,9 @@ public class Controller : MonoBehaviour
         dashAction.Disable();
     }
 
+    public Vector2 GetMoveDirection() {
+        return _moveDirection;
+    }
     void OnDash() {
         Debug.Log("dashing");
         if (_currentDashCooldown <= 0 && !_dashing && _moveDirection.magnitude != 0) {
