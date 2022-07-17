@@ -283,11 +283,19 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Dash
       m_Flags: 0
+    - m_Name: 
+      m_Id: ad5badaf-f4bf-4b9c-9949-048bc1ebf9ca
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Dash
+      m_Flags: 0
     m_Flags: 0
   moveSpeed: 5
-  dashDistance: 5
-  dashCount: 3
-  dashHardCooldown: 4
+  dashSpeed: 15
+  dashTime: 0.2
+  dashHardCooldown: 0.5
 --- !u!61 &8437383213978378383
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -378,5 +386,6 @@ MonoBehaviour:
       m_Action: Shoot
       m_Flags: 0
     m_Flags: 0
+  offset: 5
   smallBullet: {fileID: 0}
   bigBullet: {fileID: 0}
