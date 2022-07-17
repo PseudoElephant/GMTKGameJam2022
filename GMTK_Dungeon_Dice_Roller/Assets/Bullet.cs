@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     [Header("Bullet")] 
     [Tooltip("Configure the bullet props")]
-    public float damage = 5f;
+    public int damage = 5;
     public float shootSpeed = 1f;
     private Vector2 _shootDir;
 
@@ -23,9 +23,18 @@ public class Bullet : MonoBehaviour
         StartCoroutine(KillUntil());
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-     if (other.gameObject.tag != "Player")
-        Destroy(this.gameObject);
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "HarmEnemy" || other.gameObject.tag == "HarmPlayer") return;
+        
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Enemy")
+            Destroy(gameObject);
+        
+        if (gameObject.tag == "HarmEnemy" && other.gameObject.tag == "Enemy")
+            Destroy(gameObject);
+
+        if (gameObject.tag == "HarmPlayer" && other.gameObject.tag == "Player")
+             Destroy(gameObject);
     }
  
 
@@ -42,7 +51,7 @@ public class Bullet : MonoBehaviour
         this.shootSpeed =  speed;
    }
 
-    public void SetDamage(float dmg) {
+    public void SetDamage(int dmg) {
         this.damage =  dmg;
    }
 

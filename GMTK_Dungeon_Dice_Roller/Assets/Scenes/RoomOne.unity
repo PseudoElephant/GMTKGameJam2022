@@ -167,7 +167,7 @@ Transform:
   - {fileID: 1595908569}
   - {fileID: 1528104592}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &117332361
 GameObject:
@@ -246,6 +246,99 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 477973991928708315, guid: 3bad023789d801743a1737895721447d, type: 3}
   m_PrefabInstance: {fileID: 477973991673067594}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &387763309
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 511894640164587653, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511894640164587653, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 511894640164587653, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 1429004365}
+    - target: {fileID: 511894640164587653, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 511894640164587653, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: shootSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 511894640164587653, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 7471379201207166408, guid: 6cf878eafb4cc7f4c8d0736bbf367ddc, type: 3}
+    - target: {fileID: 511894640164587653, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: shootCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 511894640164587653, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: numOfBulletsToShoot
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 511894640164587653, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: shootCooldownBetweenBullets
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758758572182450564, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_Name
+      value: Enemy 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.555005
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14785822
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011102032329378246, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
 --- !u!1 &437601381
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +457,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &507620568
 MonoBehaviour:
@@ -1132,6 +1225,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1429004365 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2453050519312571597, guid: f1a551a7f0a588e47847b83647057d52, type: 3}
+  m_PrefabInstance: {fileID: 387763309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1528104591
 GameObject:
   m_ObjectHideFlags: 0
@@ -3372,7 +3470,7 @@ Transform:
   m_Children:
   - {fileID: 949349990}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1826945667
 GameObject:
@@ -3404,7 +3502,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1826945669
 MonoBehaviour:
@@ -3523,6 +3621,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378368, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: dashAction.m_SingletonActionBindings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378368, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: dashAction.m_SingletonActionBindings.Array.data[1].m_Id
+      value: ad5badaf-f4bf-4b9c-9949-048bc1ebf9ca
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378368, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: dashAction.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Mouse>/rightButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378368, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: dashAction.m_SingletonActionBindings.Array.data[1].m_Action
+      value: Dash
+      objectReference: {fileID: 0}
     - target: {fileID: 8437383213978378369, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -3582,6 +3696,30 @@ PrefabInstance:
     - target: {fileID: 8437383213978378372, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
       propertyPath: timeForLongTap
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378372, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: shootAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378372, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: shootAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 2a349d5b-f31b-44a2-8429-e79c84e95c58
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378372, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: shootAction.m_SingletonActionBindings.Array.data[1].m_Id
+      value: 2a349d5b-f31b-44a2-8429-e79c84e95c58
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378372, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: shootAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Mouse>/leftButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378372, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: shootAction.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Mouse>/leftButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378372, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: shootAction.m_SingletonActionBindings.Array.data[1].m_Action
+      value: Shoot
       objectReference: {fileID: 0}
     - target: {fileID: 8437383213978378382, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
       propertyPath: m_Name

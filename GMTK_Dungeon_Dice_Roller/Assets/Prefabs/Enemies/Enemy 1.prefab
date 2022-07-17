@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 129910638312607731}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,6 +136,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc54ab334fe6f947b4420e6e5719ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  damage: 0
+  moveSpeed: 0
+  _animator: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  shootSpeed: 0
+  numOfBulletsToShoot: 0
+  shootCooldown: 0
+  shootCooldownBetweenBullets: 0
 --- !u!50 &129910638312607731
 Rigidbody2D:
   serializedVersion: 4
@@ -156,4 +165,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
