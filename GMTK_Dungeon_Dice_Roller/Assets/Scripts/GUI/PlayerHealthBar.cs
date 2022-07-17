@@ -47,17 +47,37 @@ public class PlayerHealthBar : MonoBehaviour
         }
 
         int numOfChildren = transform.childCount;
-        for (int i = 0; i < healthToRemove; i++)
-        {
-            // TODO: Somwhere here the healthbar is not removing the correct indices 
-            transform.GetChild(numOfChildren - i - 1).GetComponent<HealthTweenAnimations>().Hide();
+        int removedHealth = 0;
+        int i = 0;
+        while (removedHealth < healthToRemove)
+        {    
+            GameObject obj = transform.GetChild(numOfChildren - i - 1).gameObject;
+            i++;
+            if (LeanTween.isTweening(obj)) 
+            {
+                continue;
+            }
+            obj.GetComponent<HealthTweenAnimations>().Hide();
+            removedHealth++;
+
         }
 
+       
         PlayerHealth -= healthToRemove;
     }
 
     public void AddPlayerHealth(int health)
     {
+         int numOfChildren = transform.childCount;
+         if (numOfChildren > PlayerHealth) {
+            for (int i = PlayerHealth; i < numOfChildren; i++) {
+                GameObject obj = transform.GetChild(i).gameObject;
+                LeanTween.cancel(obj);
+                obj.GetComponent<HealthTweenAnimations>().Show();
+                health--;
+            }
+         }
+
         for (int i = 0; i < health; i++)
         {
             GameObject newInstance = Instantiate(healthPointPrefab, transform);
