@@ -11,6 +11,7 @@ public class DoorTransport : MonoBehaviour
     [Tooltip("Loads a Scene")]
     public string sceneName = "";
 
+
     void Start()
     {
         LevelManager.OnLevelStart  += new LevelManager.CallbackAction(DisableTrigger);
@@ -27,7 +28,7 @@ public class DoorTransport : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") {
-           SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+          TransitionManager.LoadScene(sceneName);
         }
     }
 }
