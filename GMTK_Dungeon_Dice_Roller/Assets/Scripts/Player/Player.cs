@@ -12,9 +12,15 @@ public class Player : MonoBehaviour
     private bool _isDying;
     void Start() {
         Debug.Log("Player Start");
-        LevelManager.SetHealth(health);
+        LevelManager.PlayerBuff buffs = LevelManager.GetPlayerBuffs();
+        health = Math.Clamp(health + buffs.health, 1, 1000);
+        LevelManager.SetHealth(health);  
+        LevelManager.OnExtraLife += () => {
+            health++; 
+            LevelManager.SetHealth(health);
+        };
     }
-
+    
     private void OnDeath()
     {
         if (_isDying) return;

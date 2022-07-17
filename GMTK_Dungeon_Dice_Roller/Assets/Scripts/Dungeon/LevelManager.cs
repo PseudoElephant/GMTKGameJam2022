@@ -18,6 +18,25 @@ public class LevelManager : MonoBehaviour
 
     public delegate void ItemCallback(GameObject value);
 
+    public struct EntityBuff {
+       public int speed;
+       public int shootSpeed;
+       public int damage;
+       public int health;
+    }
+
+    public struct PlayerBuff {
+        public int speed;
+        public float shootSpeed;
+        public int damage;
+        public int health;
+        public float dashCooldown;
+        public int extraShots;
+    }
+
+    private EntityBuff enemyBuff;
+    private PlayerBuff playerBuff;
+
     private int _enemyCount;    
 
     public enum Event 
@@ -60,11 +79,7 @@ public class LevelManager : MonoBehaviour
 
     public static event ModifierCallback OnDecreaseDashCooldown;
 
-    public static event ModifierCallback OnIncreaseRate;
-
-    public static event ModifierCallback OnIncreaseDamage;
-
-    public static event ItemCallback OnNewItem;
+    public static event ModifierIntCallback OnIncreaseDamage;
     public static event CallbackAction OnDuplicate;
     public static event ModifierCallback OnDashCountChange;
     public static event ModifierCallback OnIncreaseEnemyHealth;
@@ -79,6 +94,9 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Waking LevelManger");
         if (Instance == null) {
             Instance = this;
+            enemyBuff = new EntityBuff();
+            playerBuff = new PlayerBuff();
+            
             return;
         }
 
@@ -176,46 +194,37 @@ public class LevelManager : MonoBehaviour
         case Dice.GoodDice.ExtraLife: 
         {
             LevelManager.BroadcastEvent(Event.ExtraLife);
+            LevelManager.Instance.playerBuff.health++;
             break;
         }
         case Dice.GoodDice.IncreaseSpeed: 
         {
             OnIncreaseSpeed?.Invoke(1f);
+            LevelManager.Instance.playerBuff.speed++;
             break;
         }
         case Dice.GoodDice.IncreaseDamage:
         {
-            OnIncreaseDamage?.Invoke(1f);
-            break;
-        }
-        case Dice.GoodDice.LaserBeam:
-        {
-            // OnNewItem(prefab)
+            OnIncreaseDamage?.Invoke(5);
+            LevelManager.Instance.playerBuff.damage+=5;
             break;
         }
         case Dice.GoodDice.ExtraShot:
         {
             OnExtraShot?.Invoke();
-            break;
-        }
-        case Dice.GoodDice.IncreaseAttackSpeed:
-        {
-            OnIncreaseRate?.Invoke(1f);
+            LevelManager.Instance.playerBuff.extraShots++;
             break;
         }
         case Dice.GoodDice.FasterBulletSpeed:
         {
-            OnIncreaseBulletSpeed?.Invoke(1f);
-            break;
-        }
-        case Dice.GoodDice.NukeGame:
-        {
-            // Spawn Bomb
+            OnIncreaseBulletSpeed?.Invoke(.1f);
+            LevelManager.Instance.playerBuff.shootSpeed+=-.1f;
             break;
         }
         case Dice.GoodDice.LowerDashCooldown:
         {
-            OnDecreaseDashCooldown?.Invoke(1f);
+            OnDecreaseDashCooldown?.Invoke(0.1f);
+            LevelManager.Instance.playerBuff.dashCooldown+=0.1f;
             break;
         }
 
@@ -232,6 +241,7 @@ public class LevelManager : MonoBehaviour
         case Dice.BadDice.FasterEnemies: 
         {
             OnIncreaseEnemySpeed?.Invoke(1f);
+            LevelManager.Instance.enemyBuff.speed++;
             break;
         }
         case Dice.BadDice.SpawnEnemy: 
@@ -257,11 +267,13 @@ public class LevelManager : MonoBehaviour
         case Dice.BadDice.IncreaseEnemyHealth:
         {
             OnIncreaseEnemyHealth?.Invoke(10f);
+            LevelManager.Instance.enemyBuff.health+=10;
             break;
         }
         case Dice.BadDice.IncreaseEnemyDamage:
         {
             OnIncreaseEnemyDamage?.Invoke(10f);
+            LevelManager.Instance.enemyBuff.damage+=10;
             break;
         }
         default: break;
@@ -269,6 +281,15 @@ public class LevelManager : MonoBehaviour
     
         AudioManager.Play("sfx_ApplyGoodAbility");
     }
+
+    public static EntityBuff GetEnemyBuffs() {
+        return LevelManager.Instance.enemyBuff;
+    }
+
+     public static PlayerBuff GetPlayerBuffs() {
+        return LevelManager.Instance.playerBuff;
+    }
+
     // }
     IEnumerator LateStart() {
         // Triggers start scripts on all subscribers

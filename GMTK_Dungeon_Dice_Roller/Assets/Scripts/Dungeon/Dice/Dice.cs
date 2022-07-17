@@ -10,11 +10,8 @@ public class Dice
         ExtraLife,
         IncreaseSpeed,
         IncreaseDamage,
-        LaserBeam,
         ExtraShot,
-        IncreaseAttackSpeed,
         FasterBulletSpeed,
-        NukeGame,
         LowerDashCooldown
     }
 
@@ -53,11 +50,8 @@ public class Dice
             GoodDice.ExtraLife => "Extra Life!",
             GoodDice.IncreaseSpeed => "Speed Increased",
             GoodDice.IncreaseDamage => "Damage Increase",
-            GoodDice.LaserBeam => "Laser Beam!",
             GoodDice.ExtraShot => "Extra Shot!",
-            GoodDice.IncreaseAttackSpeed => "Increased Attack Speed",
             GoodDice.FasterBulletSpeed => "Faster Bullet Speed",
-            GoodDice.NukeGame => "Nuke Em'!",
             GoodDice.LowerDashCooldown => "Faster Dash Cooldown",
             _ => throw new ArgumentOutOfRangeException(nameof(dice), dice, null)
         };

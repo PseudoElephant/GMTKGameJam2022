@@ -44,6 +44,16 @@ public class Controller : MonoBehaviour
         SubscribeEvents();
     }
 
+    private void ApplyBuffs() 
+    {
+        LevelManager.PlayerBuff buffs = LevelManager.GetPlayerBuffs();
+        // damage = Math.Clamp(damage + buffs.damage, 0, 1000);
+        moveSpeed = (float)Math.Clamp(moveSpeed + buffs.speed, 0, 1000);
+        dashHardCooldown = (float)Math.Clamp(dashHardCooldown + buffs.dashCooldown, 0.1f, 5);
+        
+    }
+
+
     private void SubscribeEvents() {
         LevelManager.OnIncreaseSpeed += extra => moveSpeed += extra;
     }
