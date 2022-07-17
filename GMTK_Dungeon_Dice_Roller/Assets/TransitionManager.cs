@@ -11,7 +11,7 @@ public class TransitionManager : MonoBehaviour
     public float transitionTime;
     public CanvasGroup transition;
 
-    private string startScene = "Sart Room";
+    private string startScene = "Start Room";
 
     // Start is called before the first frame update
     void Start()

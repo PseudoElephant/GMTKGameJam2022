@@ -7,9 +7,8 @@ public class PlayerHealthBar : MonoBehaviour
 {
     public int PlayerHealth = 5;
     public GameObject healthPointPrefab;
-
-    private void Awake()
-    {
+    
+    void Start() {
         int currentHealthPoints = transform.childCount;
         while (currentHealthPoints < PlayerHealth)
         {
@@ -17,9 +16,6 @@ public class PlayerHealthBar : MonoBehaviour
             newInstance.GetComponent<HealthTweenAnimations>().Show();
             currentHealthPoints = transform.childCount;
         }
-    }
-    
-    void Start() {
         LevelManager.OnChangeHealth += LevelManagerOnOnChangeHealth();
     }
 

@@ -45,7 +45,7 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    public static void Pause(string name)
+    public static void Stop(string name)
     {
         Sounds s = Array.Find(Instance.sounds, sound => sound.name == name);
         
@@ -56,6 +56,19 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.Stop();
+    }
+
+    public static void Loop(string name)
+    {
+        Sounds s = Array.Find(Instance.sounds, sound => sound.name == name);
+        
+        if (s == null)
+        {
+            Debug.Log("NO AUDIO FILE: "+name);
+            return;
+        }
+
+        s.source.loop = true;
     }
 
     private void SubscribeToEvents()

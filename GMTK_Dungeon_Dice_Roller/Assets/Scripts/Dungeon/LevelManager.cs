@@ -106,6 +106,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start() {
          StartCoroutine(LateStart());
+         DontDestroyOnLoad(gameObject);
     }
 
 // Enemy Control 
