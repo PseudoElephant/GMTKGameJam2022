@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine;
 
 public class EyesFollowMouseBehaviour : MonoBehaviour
@@ -21,7 +23,7 @@ public class EyesFollowMouseBehaviour : MonoBehaviour
     
     private void UpdateEyesPosition()
     {
-        Vector2 mousePosition = Input.mousePosition;
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
         Vector2 mouseDir = _originalPos - mousePosition;
         
