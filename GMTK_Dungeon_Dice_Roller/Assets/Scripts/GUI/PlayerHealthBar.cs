@@ -17,6 +17,12 @@ public class PlayerHealthBar : MonoBehaviour
             newInstance.GetComponent<HealthTweenAnimations>().Show();
             currentHealthPoints = transform.childCount;
         }
+
+    }
+    
+    void Start() {
+        Debug.Log("Player HUD Start");
+         LevelManager.OnChangeHealth += health => SetPlayerHealth(health);
     }
 
     public void SetPlayerHealth(int newHealth)
