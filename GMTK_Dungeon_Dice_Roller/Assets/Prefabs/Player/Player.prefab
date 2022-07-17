@@ -387,5 +387,5 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   offset: 5
-  smallBullet: {fileID: 0}
-  bigBullet: {fileID: 0}
+  smallBullet: {fileID: 7471379201207166408, guid: a2bf2b33ac111cb40ac5d451f4ad6282, type: 3}
+  bigBullet: {fileID: 7471379201207166408, guid: b5c9b6ba32e3a9c4f90c073b1e4697be, type: 3}

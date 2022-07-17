@@ -29,35 +29,43 @@ public class Shoot : MonoBehaviour
 
     private int _speedAmp;
 
-    private int _extraShots = 3;
+    private int _extraShots = 0;
 
     private void Awake()
     {
         // Getting the first binding of the input action using index of 0. If we had more bindings, we would use different indices.
         buttonControl = (ButtonControl)shootAction.controls[0];
     }
-
-    private void Start() {
+    
+    private void Start()
     {
-         LevelManager.PlayerBuff buffs = LevelManager.GetPlayerBuffs();
-         timeForLongTap = Math.Clamp(timeForLongTap - buffs.shootSpeed, 0, 100);
-         _damageAmp = Math.Clamp(_damageAmp + buffs.damage, 1, 10000);
-         _extraShots += buffs.extraShots; 
+        LevelManager.PlayerBuff buffs = LevelManager.GetPlayerBuffs();
+        timeForLongTap = Math.Clamp(timeForLongTap - buffs.shootSpeed, 0, 100);
+        _damageAmp = Math.Clamp(_damageAmp + buffs.damage, 1, 10000);
+        _extraShots += buffs.extraShots;
+        
+        LevelManager.OnIncreaseBulletSpeed += LevelManagerOnOnIncreaseBulletSpeed;
 
-         LevelManager.OnIncreaseBulletSpeed += (value) => {
-            timeForLongTap = Math.Clamp(timeForLongTap - value, 0, 100);
-         };
+        LevelManager.OnIncreaseDamage += LevelManagerOnOnIncreaseDamage;
 
-        LevelManager.OnIncreaseDamage += (value) => {
-            _damageAmp += value;
-         };
-
-         
-        LevelManager.OnExtraShot += () => {
-            _extraShots += 1;
-         };
-
+        LevelManager.OnExtraShot += LevelManagerOnOnExtraShot();
     }
+
+    private LevelManager.CallbackAction LevelManagerOnOnExtraShot()
+    {
+        return () => {
+            _extraShots += 1;
+        };
+    }
+
+    private void LevelManagerOnOnIncreaseDamage(int value)
+    {
+        _damageAmp += value;
+    }
+
+    private void LevelManagerOnOnIncreaseBulletSpeed(float value)
+    {
+        timeForLongTap = Math.Clamp(timeForLongTap - value, 0, 100);
     }
 
     private void OnEnable() {
@@ -95,8 +103,8 @@ public class Shoot : MonoBehaviour
             if (_isStrongShoot) {
                 AudioManager.Play("sfx_shoot_hard");
 
-                for (int i = -1; i < _extraShots; i++) {
-                    Vector2 shootDir = new Vector2((float) Math.Cos((2*Math.PI/(10))*i), (float) Math.Sin((2*Math.PI/(10))*i)) * dir;
+                for (int i = 0; i < _extraShots + 1; i++) {
+                    Vector2 shootDir = Quaternion.AngleAxis((i-_extraShots/2)*20, Vector3.forward) * dir;
              
                     GameObject bigB = Instantiate(bigBullet, transform.position + new Vector3(shootDir.x, shootDir.y, 0) * offset, Quaternion.identity);
                     Bullet b = bigB.GetComponent<Bullet>();
@@ -109,15 +117,24 @@ public class Shoot : MonoBehaviour
 
             AudioManager.Play("sfx_shoot_soft");
 
-            for (int i = 0; i < _extraShots + 1; i++) {
-                Vector2 shootDir = new Vector2((float) Math.Cos((2*Math.PI/(10))*i), (float) Math.Sin((2*Math.PI/(10))*i)) * dir;
+            for (int i = 0; i < _extraShots + 1; i++)
+            {
+                Vector2 shootDir = Quaternion.AngleAxis((i-_extraShots/2)*20, Vector3.forward) * dir;
 
                 GameObject smallA = Instantiate(smallBullet, transform.position + new Vector3(shootDir.x, shootDir.y, 0) * offset, Quaternion.identity);
                 Bullet a = smallA.GetComponent<Bullet>();
                 a.SetDirection(dir);
                 a.damage += _damageAmp;
             }
-
         }
+    }
+
+    private void OnDestroy()
+    {
+        LevelManager.OnIncreaseBulletSpeed -= LevelManagerOnOnIncreaseBulletSpeed;
+
+        LevelManager.OnIncreaseDamage -= LevelManagerOnOnIncreaseDamage;
+
+        LevelManager.OnExtraShot -= LevelManagerOnOnExtraShot();
     }
 }

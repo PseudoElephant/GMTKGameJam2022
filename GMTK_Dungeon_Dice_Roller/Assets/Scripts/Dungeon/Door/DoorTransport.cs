@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,18 @@ public class DoorTransport : MonoBehaviour
 
     void Start()
     {
-        LevelManager.OnLevelStart  += new LevelManager.CallbackAction(DisableTrigger);
-        LevelManager.OnLevelBeaten += new LevelManager.CallbackAction(EnableTrigger);
+        LevelManager.OnLevelStart  += LevelManagerOnOnLevelStart();
+        LevelManager.OnLevelBeaten += LevelManagerOnOnLevelBeaten();
+    }
+
+    private LevelManager.CallbackAction LevelManagerOnOnLevelBeaten()
+    {
+        return new LevelManager.CallbackAction(EnableTrigger);
+    }
+
+    private LevelManager.CallbackAction LevelManagerOnOnLevelStart()
+    {
+        return new LevelManager.CallbackAction(DisableTrigger);
     }
 
     void DisableTrigger() {
@@ -30,5 +41,11 @@ public class DoorTransport : MonoBehaviour
         if (other.tag == "Player") {
           TransitionManager.LoadScene(sceneName);
         }
+    }
+
+    private void OnDestroy()
+    {
+        LevelManager.OnLevelStart  -= LevelManagerOnOnLevelStart();
+        LevelManager.OnLevelBeaten -= LevelManagerOnOnLevelBeaten();
     }
 }

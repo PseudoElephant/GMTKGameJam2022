@@ -10,17 +10,23 @@ public class Player : MonoBehaviour
 
     public int health = 10;
     private bool _isDying;
-    void Start() {
-        Debug.Log("Player Start");
+    
+    void Start()
+    {
+        LevelManager.OnExtraLife += LevelManagerOnOnExtraLife();
         LevelManager.PlayerBuff buffs = LevelManager.GetPlayerBuffs();
         health = Math.Clamp(health + buffs.health, 1, 1000);
         LevelManager.SetHealth(health);  
-        LevelManager.OnExtraLife += () => {
+    }
+
+    private LevelManager.CallbackAction LevelManagerOnOnExtraLife()
+    {
+        return () => {
             health++; 
             LevelManager.SetHealth(health);
         };
     }
-    
+
     private void OnDeath()
     {
         if (_isDying) return;
@@ -64,4 +70,8 @@ public class Player : MonoBehaviour
         OnHit();
     }
 
+    private void OnDestroy()
+    {
+        LevelManager.OnExtraLife -= LevelManagerOnOnExtraLife();
+    }
 }

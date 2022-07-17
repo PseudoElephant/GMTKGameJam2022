@@ -155,4 +155,10 @@ public class DiceDisplay : MonoBehaviour
         LevelManager.OnGoodDiceRoll += TriggerGoodDice;
         LevelManager.OnBadDiceRoll += TriggerBadDice;
     }
+
+    private void OnDestroy()
+    {
+        LevelManager.OnGoodDiceRoll -= TriggerGoodDice;
+        LevelManager.OnBadDiceRoll -= TriggerBadDice;
+    }
 }

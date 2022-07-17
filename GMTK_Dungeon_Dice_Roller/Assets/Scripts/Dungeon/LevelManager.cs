@@ -105,6 +105,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start() {
          StartCoroutine(LateStart());
+         DontDestroyOnLoad(gameObject);
     }
 
 // Enemy Control 
@@ -288,18 +289,13 @@ public class LevelManager : MonoBehaviour
 
      public static PlayerBuff GetPlayerBuffs() {
         return LevelManager.Instance.playerBuff;
-    }
+     }
 
-    // }
+    
     IEnumerator LateStart() {
         // Triggers start scripts on all subscribers
         yield return new WaitForFixedUpdate();
         Debug.Log("Late Start");
-
-        if (LevelBeaten()) {
-            Debug.Log("Level Beaten");
-        } else {
-            LevelManager.OnLevelStart();
-        }       
+        LevelManager.OnLevelStart();
     }
 }

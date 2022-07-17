@@ -12,13 +12,31 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Start Room.unity
     guid: b4617e11922109b46ad2252b090ae7fe
   - enabled: 1
-    path: Assets/Scenes/RoomOne.unity
-    guid: a7a847f1f38b0f34bb3b2c67951d93cc
+    path: Assets/Scenes/Levels/Room 1.unity
+    guid: d7d96d98d64127a45b6902265d3cf6bf
   - enabled: 1
-    path: Assets/Scenes/RoomTwo.unity
-    guid: 26c78c7746683f74da8fcf743ac1ba13
+    path: Assets/Scenes/Levels/Room 2.unity
+    guid: f4bb8dbd1566fb74e98933cc4a148644
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Levels/Room 3.unity
+    guid: cca7918b2568302439192ade5633909d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Room 4.unity
+    guid: c204f9e257867644dbaf6c8cb68b2249
+  - enabled: 1
+    path: Assets/Scenes/Levels/Room 5.unity
+    guid: fa4a36f4e2326c0458bff43d3ffacca7
+  - enabled: 1
+    path: Assets/Scenes/Levels/Room 6.unity
+    guid: a05e66f233e12e041a522aa9ecd2f0ef
+  - enabled: 1
+    path: Assets/Scenes/Levels/Room 7.unity
+    guid: fa7eb69ee6f370e4f8d9239dab656f4d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Room 8.unity
+    guid: a9dfe7aa74c72784084899de3bcb7ec1
+  - enabled: 1
+    path: Assets/Scenes/Levels/Final Room.unity
+    guid: 642c907a68a3b964ba28478878717f45
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6cb97763b07e5a447ad25a375a383d5c, type: 2}

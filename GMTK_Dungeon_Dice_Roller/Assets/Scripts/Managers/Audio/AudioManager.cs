@@ -12,8 +12,6 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             return;
         }
-        
-        DontDestroyOnLoad(gameObject);
     }
 
     public void Start()
@@ -30,6 +28,8 @@ public class AudioManager : MonoBehaviour
         Play("SongMenu");
         
         SubscribeToEvents();
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     public static void Play(string name)
@@ -60,10 +60,44 @@ public class AudioManager : MonoBehaviour
 
     private void SubscribeToEvents()
     {
-        LevelManager.OnLevelStart += () => Play("sfx_levelStart");
-        LevelManager.OnPlayerDeath += () => Play("sfx_onPlayerDie");
-        LevelManager.OnPlayerHit += () => Play("sfx_onPlayerHit");
-        LevelManager.OnDiceRoll += () => Play("sfx_DiceRoll");
-        LevelManager.OnEnemyKilled += () => Play("sfx_EnemyDeath");
+        LevelManager.OnLevelStart += LevelManagerOnOnLevelStart();
+        LevelManager.OnPlayerDeath += LevelManagerOnOnPlayerDeath();
+        LevelManager.OnPlayerHit += LevelManagerOnOnPlayerHit();
+        LevelManager.OnDiceRoll += LevelManagerOnOnDiceRoll();
+        LevelManager.OnEnemyKilled += LevelManagerOnOnEnemyKilled();
+    }
+
+    private void OnDestroy()
+    {
+        LevelManager.OnLevelStart -= LevelManagerOnOnLevelStart();
+        LevelManager.OnPlayerDeath -= LevelManagerOnOnPlayerDeath();
+        LevelManager.OnPlayerHit -= LevelManagerOnOnPlayerHit();
+        LevelManager.OnDiceRoll -= LevelManagerOnOnDiceRoll();
+        LevelManager.OnEnemyKilled -= LevelManagerOnOnEnemyKilled();
+    }
+
+    private static LevelManager.CallbackAction LevelManagerOnOnLevelStart()
+    {
+        return () => Play("sfx_levelStart");
+    }
+
+    private static LevelManager.CallbackAction LevelManagerOnOnPlayerDeath()
+    {
+        return () => Play("sfx_onPlayerDie");
+    }
+
+    private static LevelManager.CallbackAction LevelManagerOnOnPlayerHit()
+    {
+        return () => Play("sfx_onPlayerHit");
+    }
+
+    private static LevelManager.CallbackAction LevelManagerOnOnDiceRoll()
+    {
+        return () => Play("sfx_DiceRoll");
+    }
+
+    private static LevelManager.CallbackAction LevelManagerOnOnEnemyKilled()
+    {
+        return () => Play("sfx_EnemyDeath");
     }
 }

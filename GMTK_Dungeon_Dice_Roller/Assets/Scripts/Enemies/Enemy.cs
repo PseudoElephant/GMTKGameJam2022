@@ -16,10 +16,9 @@ namespace Enemies
 
         private void Start()
         {
-            Debug.Log("I am in!");
             _animator = GetComponent<Animator>();
-            LevelManager.Instance.AddEnemy();
             SubscribeEvents();
+            LevelManager.Instance.AddEnemy();
             ApplyBuffs();
         }
 
@@ -104,6 +103,14 @@ namespace Enemies
             }
             
             OnHit();
+        }
+
+        private void OnDestroy()
+        {
+            LevelManager.OnDuplicate -= OnDuplicate;
+            LevelManager.OnIncreaseEnemyDamage -= OnIncreaseEnemyDamage;
+            LevelManager.OnIncreaseEnemySpeed -= OnIncreaseEnemySpeed;
+            LevelManager.OnIncreaseEnemyHealth -= OnIncreaseEnemyHealth;
         }
     }
 }

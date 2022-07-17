@@ -17,11 +17,15 @@ public class PlayerHealthBar : MonoBehaviour
             newInstance.GetComponent<HealthTweenAnimations>().Show();
             currentHealthPoints = transform.childCount;
         }
-
     }
     
     void Start() {
-        LevelManager.OnChangeHealth += health => SetPlayerHealth(health);
+        LevelManager.OnChangeHealth += LevelManagerOnOnChangeHealth();
+    }
+
+    private LevelManager.ModifierIntCallback LevelManagerOnOnChangeHealth()
+    {
+        return health => SetPlayerHealth(health);
     }
 
     public void SetPlayerHealth(int newHealth)
@@ -68,6 +72,7 @@ public class PlayerHealthBar : MonoBehaviour
 
     public void AddPlayerHealth(int health)
     {
+        Debug.Log(transform);
          int numOfChildren = transform.childCount;
          if (numOfChildren > PlayerHealth) {
             for (int i = PlayerHealth; i < numOfChildren; i++) {
@@ -85,5 +90,10 @@ public class PlayerHealthBar : MonoBehaviour
         }
         
         PlayerHealth += health;
+    }
+
+    private void OnDestroy()
+    {
+        LevelManager.OnChangeHealth -= LevelManagerOnOnChangeHealth();
     }
 }
