@@ -3792,6 +3792,18 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8437383213978378368, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: dashTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378368, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: dashSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378368, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
+      propertyPath: dashHardCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437383213978378368, guid: 809681bfcbd69434dadb02c8eb211e65, type: 3}
       propertyPath: dashAction.m_SingletonActionBindings.Array.size
       value: 2
       objectReference: {fileID: 0}
