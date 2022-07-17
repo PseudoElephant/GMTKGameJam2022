@@ -21,8 +21,7 @@ public class PlayerHealthBar : MonoBehaviour
     }
     
     void Start() {
-        Debug.Log("Player HUD Start");
-         LevelManager.OnChangeHealth += health => SetPlayerHealth(health);
+        LevelManager.OnChangeHealth += health => SetPlayerHealth(health);
     }
 
     public void SetPlayerHealth(int newHealth)

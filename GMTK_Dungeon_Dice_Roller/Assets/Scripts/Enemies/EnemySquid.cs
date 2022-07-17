@@ -49,6 +49,8 @@ public class EnemySquid : Enemy
         {
             Vector2 shootDir = _playerTarget.transform.position - transform.position;
             _animator.SetTrigger("Shoot");
+            
+            AudioManager.Play("sfx_EnemyShoot");
             GameObject newBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             
             Bullet bullet = newBullet.GetComponent<Bullet>();

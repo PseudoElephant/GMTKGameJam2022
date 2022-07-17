@@ -68,6 +68,7 @@ namespace Enemies
 
         private void OnHit()
         {
+            AudioManager.Play("sfx_onPlayerHit");
             Vector3 originalScale = transform.localScale;
             LeanTween.scale(gameObject, originalScale + new Vector3(0.05f, 0.05f, 0.05f), 0.1f).setEaseInOutSine()
                 .setOnComplete(
@@ -84,6 +85,7 @@ namespace Enemies
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.tag != "HarmEnemy") return;
+            
             health -= col.gameObject.GetComponent<Bullet>().damage;
             if (health <= 0)
             {

@@ -17,12 +17,15 @@ public class Doors : MonoBehaviour
         _doorsTween = GetComponent<DoorsTween>();
     }
 
-    void LockDoors() {
+    void LockDoors()
+    {
+        AudioManager.Play("sfx_DoorClose");
         Debug.Log("Locking Doors");
         _doorsTween.Lock();
     }
 
     void OpenDoors() {
+        AudioManager.Play("sfx_DoorOpen");
          Debug.Log("Opening Doors");
         _doorsTween.Open();
         

@@ -66,11 +66,13 @@ public class Shoot : MonoBehaviour
             dir.Normalize();
 
             if (_isStrongShoot) {
+                AudioManager.Play("sfx_shoot_hard");
                 GameObject bigB = Instantiate(bigBullet, transform.position + new Vector3(dir.x, dir.y, 0) * offset, Quaternion.identity);
                 bigB.GetComponent<Bullet>().SetDirection(dir);
                 return;
             }
 
+            AudioManager.Play("sfx_shoot_soft");
             GameObject smallA = Instantiate(smallBullet, transform.position +  new Vector3(dir.x, dir.y, 0) * offset, Quaternion.identity);
             smallA.GetComponent<Bullet>().SetDirection(dir);
         }
