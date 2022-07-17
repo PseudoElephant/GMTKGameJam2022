@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Enemies;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -17,7 +18,7 @@ public class EnemySquid : Enemy
     private GameObject _playerTarget;
     private bool _canShoot = true;
     private Rigidbody2D _rigidBody;
-
+    
     
     // Start is called before the first frame update
     private void Awake()
@@ -40,6 +41,9 @@ public class EnemySquid : Enemy
     private IEnumerator Shoot()
     {
         _canShoot = false;
+        
+        yield return new WaitForSeconds(shootCooldown);
+        
         int currentFiredBullets = 0;
         while (currentFiredBullets != numOfBulletsToShoot)
         {
@@ -47,15 +51,15 @@ public class EnemySquid : Enemy
             _animator.SetTrigger("Shoot");
             GameObject newBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             
-            // newBullet.SetDirection(shootDir);
-            // newBullet.SetDamage(damage);
-            // newBullet.SetSpeed(shootSpeed);
+            Bullet bullet = newBullet.GetComponent<Bullet>();
+            bullet.SetDirection(shootDir.normalized);
+            bullet.SetDamage(damage);
+            bullet.SetSpeed(shootSpeed);
 
             currentFiredBullets++;
             yield return new WaitForSeconds(shootCooldownBetweenBullets);
         }
-
-        yield return new WaitForSeconds(shootCooldown);
+        
         _canShoot = true;
     }
     

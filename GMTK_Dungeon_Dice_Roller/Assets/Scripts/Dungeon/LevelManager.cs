@@ -95,16 +95,27 @@ public class LevelManager : MonoBehaviour
 
     private void RemoveEnemy() {
         _enemyCount--;
-        OnEnemyKilled();
+        if (OnEnemyKilled != null)
+        {
+            LevelManager.OnEnemyKilled();
+        }
+        
         if (LevelBeaten()){
-            OnLevelBeaten();
-            OnLevelFinish();
+            if (OnLevelBeaten != null)
+            {
+                LevelManager.OnLevelBeaten();
+            }
+
+            if (OnLevelBeaten != null)
+            {
+                LevelManager.OnLevelFinish();
+            }
         }
     }
 
     private static void LevelEnd() {
-        OnPlayerDeath();
-        OnLevelFinish();
+        OnPlayerDeath?.Invoke();
+        OnLevelFinish?.Invoke();
     }
 
 // Event Management

@@ -14,4 +14,22 @@ public class Player : MonoBehaviour
         LevelManager.SetHealth(health);
     }
 
+    private void OnDeath()
+    {
+        LeanTween.scale(gameObject, Vector3.zero, 1f).setEaseInOutSine().setOnComplete(() => Destroy(gameObject));
+        LeanTween.rotateAround(gameObject, Vector3.forward, 360, 1f).setEaseInOutSine();
+        LevelManager.BroadcastEvent(LevelManager.Event.PlayerDeath);
+    }
+    
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag != "HarmPlayer") return;
+        health -= col.gameObject.GetComponent<Bullet>().damage;
+        LevelManager.SetHealth(health);
+        if (health <= 0)
+        {
+            OnDeath();
+        }
+    }
+
 }

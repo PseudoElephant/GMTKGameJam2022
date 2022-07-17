@@ -1,5 +1,7 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Enemies
 {
@@ -10,10 +12,13 @@ namespace Enemies
         public int damage;
         public float moveSpeed;
         public Animator _animator;
+        private bool _isDying = false;
 
-        private void Awake()
+        private void Start()
         {
+            Debug.Log("I am in!");
             _animator = GetComponent<Animator>();
+            LevelManager.Instance.AddEnemy();
         }
 
         private void OnDuplicate()
@@ -48,18 +53,44 @@ namespace Enemies
 
         private void OnDeath()
         {
-            LevelManager.BroadcastEvent(LevelManager.Event.EnemyKilled);
+            if (_isDying) return;
+
+            _isDying = true;
             _animator.SetTrigger("Death");
+            LeanTween.scale(gameObject, Vector3.zero, 1f).setEaseInOutSine().setOnComplete(() => Destroy(gameObject));
+            LevelManager.BroadcastEvent(LevelManager.Event.EnemyKilled);
+            
+            if (Random.value > 0.5)
+            {
+                LevelManager.BroadcastEvent(LevelManager.Event.DiceRoll);
+            }
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnHit()
         {
-            if (collision.gameObject.tag != "Harm") return;
-            health -= collision.gameObject.HarmBehaviour.GetDamage();
+            Vector3 originalScale = transform.localScale;
+            LeanTween.scale(gameObject, originalScale + new Vector3(0.05f, 0.05f, 0.05f), 0.1f).setEaseInOutSine()
+                .setOnComplete(
+                    () =>
+                    {
+                        LeanTween.scale(gameObject, originalScale, 0.1f).setEaseInOutSine();
+                    });
+            LeanTween.rotateLocal(gameObject, new Vector3(0f, 0f, 0.4f), 0.1f).setEaseInOutSine().setOnComplete(() =>
+            {
+                LeanTween.rotateLocal(gameObject, Vector3.zero, 0.1f).setEaseInOutSine();
+            });
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.gameObject.tag != "HarmEnemy") return;
+            health -= col.gameObject.GetComponent<Bullet>().damage;
             if (health <= 0)
             {
                 OnDeath();
             }
+            
+            OnHit();
         }
     }
 }
