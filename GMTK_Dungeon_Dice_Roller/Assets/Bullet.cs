@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Bullet : MonoBehaviour
+public class Bullet : HarmBehaviour
 {
-
     [Header("Bullet")] 
     [Tooltip("Configure the bullet props")]
-    public int damage = 5;
     public float shootSpeed = 1f;
     private Vector2 _shootDir;
 
@@ -45,19 +43,11 @@ public class Bullet : MonoBehaviour
         yield return new WaitForSecondsRealtime(maxLife);
         Destroy(this);
     }
-
-   public float GetDamage() {
-        return damage;
-   }
-
+    
    public void SetSpeed(float speed) {
         this.shootSpeed =  speed;
    }
-
-    public void SetDamage(int dmg) {
-        this.damage =  dmg;
-   }
-
+   
     public void SetDirection(Vector2 dir) {
         this._shootDir =  dir;
    }

@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag != "HarmPlayer") return;
         LevelManager.BroadcastEvent(LevelManager.Event.PlayerHit);
-        health -= col.gameObject.GetComponent<Bullet>().damage;
+        health -= col.gameObject.GetComponent<HarmBehaviour>().damage;
         
         LevelManager.SetHealth(health);
         if (health <= 0)
