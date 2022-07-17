@@ -75,15 +75,13 @@ public class Controller : MonoBehaviour
             }));
             }
            
-            _dashTarget =  transform.position + new Vector3(_moveDirection.x, _moveDirection.y, 0) * dashDistance;
+           Vector3 currPos = transform.position;
+            _dashTarget =  currPos + new Vector3(_moveDirection.x, _moveDirection.y, 0) * dashDistance;
              
-             RaycastHit2D hit = Physics2D.Raycast(transform.position, _moveDirection, dashDistance);
-             
+             RaycastHit2D hit = Physics2D.Raycast(new Vector3(currPos.x - 2f, currPos.y - 2f, 0), _moveDirection, dashDistance);
              // Clamping
-             if (hit.collider != null && hit.point != null) {
+             if (hit.collider != null) {
                 _dashTarget = hit.point;
-                Debug.Log(hit.point);
-                Debug.Log(hit.distance);
              }
 
             _startDistance = Vector3.Distance(transform.position, _dashTarget);
@@ -95,9 +93,6 @@ public class Controller : MonoBehaviour
         callback();
     }
 
-    void OnPlayerEffect() {
-
-    }
 
     // Start is called before the first frame update
     void Update()
@@ -113,7 +108,6 @@ public class Controller : MonoBehaviour
 
             float percent = 1 -  Vector3.Distance(transform.position, _dashTarget) / _startDistance;
 
-            // TODO: FIX COLLISION
             transform.position = Vector3.Lerp(transform.position, _dashTarget, percent);
 
             if (percent > 0.8) {

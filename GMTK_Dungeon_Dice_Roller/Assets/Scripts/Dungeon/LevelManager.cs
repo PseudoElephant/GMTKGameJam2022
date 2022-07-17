@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour
 
      public delegate void ModifierCallback(float value);
 
+      public delegate void ModifierIntCallback(int value);
+
     public delegate void ItemCallback(GameObject value);
 
     private int _enemyCount;    
@@ -49,7 +51,7 @@ public class LevelManager : MonoBehaviour
 // Dices
     public static event CallbackAction OnExtraLife;
     public static event CallbackAction OnExtraShot;
-
+    public static event ModifierIntCallback OnChangeHealth;
     public static event ModifierCallback OnIncreaseBulletSpeed;
 
     public static event ModifierCallback OnIncreaseSpeed;
@@ -143,7 +145,11 @@ public class LevelManager : MonoBehaviour
         }
     }
     // public static void BroadcastEvent(Event e, params string[] list) {
-
+    
+    public static void SetHealth(int health) {
+        Debug.Log("Health Change");
+        LevelManager.OnChangeHealth(health);
+    }
     public static void AddGoodDice(Dice.GoodDice dice) {
     switch (dice) {
         case Dice.GoodDice.ExtraLife: 
