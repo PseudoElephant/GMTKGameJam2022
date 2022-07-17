@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,20 @@ public class Doors : MonoBehaviour
     void Start()
     {
         Debug.Log("Doors Subscribing");
-        LevelManager.OnLevelStart += new LevelManager.CallbackAction(LockDoors);
-        LevelManager.OnLevelBeaten +=new LevelManager.CallbackAction(OpenDoors);
+        LevelManager.OnLevelStart += LevelManagerOnOnLevelStart();
+        LevelManager.OnLevelBeaten += LevelManagerOnOnLevelBeaten();
 
         _doorsTween = GetComponent<DoorsTween>();
+    }
+
+    private LevelManager.CallbackAction LevelManagerOnOnLevelBeaten()
+    {
+        return new LevelManager.CallbackAction(OpenDoors);
+    }
+
+    private LevelManager.CallbackAction LevelManagerOnOnLevelStart()
+    {
+        return new LevelManager.CallbackAction(LockDoors);
     }
 
     void LockDoors()
@@ -28,6 +39,11 @@ public class Doors : MonoBehaviour
         AudioManager.Play("sfx_DoorOpen");
          Debug.Log("Opening Doors");
         _doorsTween.Open();
-        
+    }
+
+    private void OnDestroy()
+    {
+        LevelManager.OnLevelStart -= LevelManagerOnOnLevelStart();
+        LevelManager.OnLevelBeaten -= LevelManagerOnOnLevelBeaten();
     }
 }

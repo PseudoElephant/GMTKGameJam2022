@@ -136,6 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad3728bef921594f83ce37d45ccb9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 4
   shootSpeed: 10
   maxLife: 5

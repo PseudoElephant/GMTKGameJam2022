@@ -96,6 +96,7 @@ public class LevelManager : MonoBehaviour
             Instance = this;
             enemyBuff = new EntityBuff();
             playerBuff = new PlayerBuff();
+            playerBuff.health = 3;
             
             return;
         }
@@ -105,7 +106,6 @@ public class LevelManager : MonoBehaviour
 
     private void Start() {
          StartCoroutine(LateStart());
-         DontDestroyOnLoad(gameObject);
     }
 
 // Enemy Control 
@@ -189,6 +189,7 @@ public class LevelManager : MonoBehaviour
     
     public static void SetHealth(int health) {
         LevelManager.OnChangeHealth(health);
+        LevelManager.Instance.playerBuff.health = health;
     }
     public static void AddGoodDice(Dice.GoodDice dice) {
     switch (dice) {
@@ -294,8 +295,12 @@ public class LevelManager : MonoBehaviour
     
     IEnumerator LateStart() {
         // Triggers start scripts on all subscribers
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(0.1f);
         Debug.Log("Late Start");
         LevelManager.OnLevelStart();
+        if (LevelBeaten())
+        {
+            LevelManager.OnLevelBeaten?.Invoke();
+        }
     }
 }

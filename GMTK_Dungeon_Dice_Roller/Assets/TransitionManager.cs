@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +11,7 @@ public class TransitionManager : MonoBehaviour
     public float transitionTime;
     public CanvasGroup transition;
 
-    public string startScene = "Sart Room";
+    private string startScene = "Sart Room";
 
     // Start is called before the first frame update
     void Start()
@@ -17,13 +19,18 @@ public class TransitionManager : MonoBehaviour
         if (Instance == null) {
             Instance = this;
             LeanTween.alphaCanvas(transition, 0f, transitionTime).setEaseInSine();
-            LevelManager.OnLevelFinish += () => LoadScene(startScene);
+            LevelManager.OnPlayerDeath += LevelManagerOnOnPlayerDeath();
             return;
         }
 
         Destroy(this.gameObject);
     }
-    
+
+    private LevelManager.CallbackAction LevelManagerOnOnPlayerDeath()
+    {
+        return () => LoadScene(startScene);
+    }
+
     public static void NextScene()
     {
       LeanTween.alphaCanvas(TransitionManager.Instance.transition, 1f, TransitionManager.Instance.transitionTime).setEaseInSine()
@@ -36,4 +43,8 @@ public class TransitionManager : MonoBehaviour
         .setOnComplete(() =>  SceneManager.LoadScene(name,LoadSceneMode.Single));
     }
 
+    private void OnDestroy()
+    {
+        LevelManager.OnPlayerDeath -= LevelManagerOnOnPlayerDeath();
+    }
 }

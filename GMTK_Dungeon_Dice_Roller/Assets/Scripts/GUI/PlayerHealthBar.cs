@@ -54,7 +54,7 @@ public class PlayerHealthBar : MonoBehaviour
         int removedHealth = 0;
         int i = 0;
         while (removedHealth < healthToRemove)
-        {    
+        {
             GameObject obj = transform.GetChild(numOfChildren - i - 1).gameObject;
             i++;
             if (LeanTween.isTweening(obj)) 
@@ -63,7 +63,6 @@ public class PlayerHealthBar : MonoBehaviour
             }
             obj.GetComponent<HealthTweenAnimations>().Hide();
             removedHealth++;
-
         }
 
        

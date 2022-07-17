@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     {
         LevelManager.OnExtraLife += LevelManagerOnOnExtraLife();
         LevelManager.PlayerBuff buffs = LevelManager.GetPlayerBuffs();
-        health = Math.Clamp(health + buffs.health, 1, 1000);
+        health = Math.Clamp(buffs.health, 1, 1000);
         LevelManager.SetHealth(health);  
     }
 
